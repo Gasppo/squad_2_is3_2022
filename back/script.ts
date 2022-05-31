@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import express from 'express'
-import { createSupportMember, getAllSupportMembers } from './api/supportMember'
+import { createSupportMember, deleteSupportMember, getAllSupportMembers, getSupportMemberById, updateSupportMember } from './api/supportMember'
+import { createTicket, deleteTicket, getAllTickets, getTicketById, updateTicket } from './api/ticket'
 
 
 const prisma = new PrismaClient()
@@ -14,5 +15,17 @@ app.get('/', async (req, res) => {
   res.send('Hello Worlds!')
 })
 
-app.get('/hola', getAllSupportMembers)
-app.post('/hola', createSupportMember) 
+
+//SupportMembers
+app.get('/supportMembers', getAllSupportMembers)
+app.get('/supportMembers/:id', getSupportMemberById)
+app.post('/supportMembers', createSupportMember) 
+app.delete('/supportMembers/:id', deleteSupportMember)
+app.put('/supportMembers/:id', updateSupportMember)
+
+//Tickets
+app.get('/tickets', getAllTickets)
+app.get('/tickets/:id', getTicketById)
+app.post('/tickets', createTicket)
+app.delete('/tickets/:id', deleteTicket)
+app.put('/tickets/:id', updateTicket)

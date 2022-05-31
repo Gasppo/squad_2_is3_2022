@@ -24,7 +24,7 @@ export async function getAllSupportMembers(req: Request, res: Response<getManySu
     }
     catch (e: any) {
         res.status(500).json({
-            name: 'Prueba',
+            name: 'Error',
             message: e.message,
         })
     }
@@ -44,7 +44,7 @@ export async function getSupportMemberById(req: Request, res: Response<getSingle
     }
     catch (e: any) {
         res.status(500).json({
-            name: 'Prueba',
+            name: 'Error finding user',
             message: e.message,
         })
     }
@@ -64,7 +64,51 @@ export async function createSupportMember(req: Request, res: Response<getSingleS
     }
     catch (e: any) {
         res.status(500).json({
-            name: 'Prueba',
+            name: 'Create Error',
+            message: e.message,
+        })
+    }
+}
+
+export async function deleteSupportMember(req: Request, res: Response<getSingleSupportMemberData>) {
+    try {
+        const { id } = req.params
+        const supportMember = await prisma.supportMember.delete({
+            where: {
+                id: Number(id),
+            },
+        })
+        res.json({
+            supportMember: supportMember,
+        })
+    }
+    catch (e: any) {
+        res.status(500).json({
+            name: 'Delete Error',
+            message: e.message,
+        })
+    }
+}
+
+export async function updateSupportMember(req: Request, res: Response<getSingleSupportMemberData>) {
+    try {
+        const { id } = req.params
+        const supportMember = await prisma.supportMember.update({
+            where: {
+                id: Number(id),
+            },
+            data: {
+                name: req.body.name,
+                email: req.body.email,
+            }
+        })
+        res.json({
+            supportMember: supportMember,
+        })
+    }
+    catch (e: any) {
+        res.status(500).json({
+            name: 'Update Error',
             message: e.message,
         })
     }

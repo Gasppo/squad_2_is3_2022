@@ -35,7 +35,7 @@ model Resource {
 }
 
 model Ticket {
-  id          Int @id
+  id          Int @id @default(autoincrement())
   title       String
   description String
   status      String
@@ -53,7 +53,7 @@ model Ticket {
 }
 
 model Product {
-  id          Int @id
+  id          Int @id @default(autoincrement())
   name        String
   description String
   vendor      String
@@ -62,7 +62,7 @@ model Product {
 }
 
 model Task {
-  id          Int @id
+  id          Int @id @default(autoincrement())
   title       String
   description String
   status      String
