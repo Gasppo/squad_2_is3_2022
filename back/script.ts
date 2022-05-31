@@ -7,7 +7,7 @@ import { createTicket, deleteTicket, getAllTickets, getTicketById, updateTicket 
 const prisma = new PrismaClient()
 const app = express()
 app.use(express.json())
-app.listen(4000, () => {
+export const server = app.listen(4000, () => {
   console.log('Server started on http://localhost:4000')
 })
 
@@ -29,3 +29,5 @@ app.get('/tickets/:id', getTicketById)
 app.post('/tickets', createTicket)
 app.delete('/tickets/:id', deleteTicket)
 app.put('/tickets/:id', updateTicket)
+
+export default app
