@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  output   = "../node_modules/.prisma/client"
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model TicketAuthor {
+  id      Int      @id
+  name    String
+  email   String
+  phone   String
+  tickets Ticket[]
+}
+
+model SupportMember {
+  id      Int      @id @default(autoincrement())
+  name    String
+  email   String
+  tickets Ticket[]
+}
+
+model Resource {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+  tasks Task[]
+}
+
+model Ticket {
+  id          Int            @id @default(autoincrement())
+  title       String
+  description String
+  status      String
+  priority    Int
+  author      TicketAuthor   @relation(fields: [authorId], references: [id])
+  authorId    Int
+  assignee    SupportMember? @relation(fields: [asigneeId], references: [id])
+  asigneeId   Int
+  internal    Boolean
+  createdAt   DateTime
+  updatedAt   DateTime
+  tasks       Task[]
+  product     Product?       @relation(fields: [productId], references: [id])
+  productId   Int
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  vendor      String
+  version     String
+  tickets     Ticket[]
+}
+
+model Task {
+  id                 Int       @id @default(autoincrement())
+  title              String
+  description        String
+  status             String
+  priority           Int
+  createdAt          DateTime
+  updatedAt          DateTime
+  ticket             Ticket    @relation(fields: [ticketId], references: [id])
+  ticketId           Int
+  resourceAssigned   Resource? @relation(fields: [resourceAssignedId], references: [id])
+  resourceAssignedId Int
+}
