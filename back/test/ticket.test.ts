@@ -54,7 +54,6 @@ describe('Test Ticket APIs', () => {
         expect(getAllTicketsRes.body.tickets).toBeDefined();
         const memberAmount = getAllTicketsRes.body.tickets?.length
         const lastID = getAllTicketsRes.body.tickets?.[memberAmount - 1].id;
-        console.log(lastID)
         const response = await request(app).put(`/tickets/${lastID}`).send({
             "title": "Test Ticket Changed",
             "description": "Test Ticket description Changed",
