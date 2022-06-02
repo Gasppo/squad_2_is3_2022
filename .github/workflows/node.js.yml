@@ -63,5 +63,5 @@ jobs:
         working-directory: back
     
     -   name: Run Tests 
-        run: npm test
+        run: npm test -- --silent --verbose
         working-directory: back
