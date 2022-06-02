@@ -48,15 +48,20 @@ jobs:
         working-directory: back
     - name: Prisma Generate
       run: npx prisma generate
+      working-directory: back
+      
     - name: Prisma Migrate 
       run: npm run db:push
+      working-directory: back
       
-    - 
+    -   name: Run CI
         run: npm ci
         working-directory: back
-    - 
+        
+    -   name: Create Build
         run: npm run build --if-present
         working-directory: back
-    - 
+    
+    -   name: Run Tests 
         run: npm test
         working-directory: back
