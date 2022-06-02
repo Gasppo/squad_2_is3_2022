@@ -131,3 +131,22 @@ export async function deleteTicket(req: Request, res: Response<getSingleTicketDa
         })
     }
 }
+
+export async function getAllTicketsWithAuthor(req: Request, res: Response<getManyTicketsData>) {
+    try {
+        const tickets = await prisma.ticket.findMany({
+            include: {
+                author: true,
+            }
+        })
+        res.json({
+            tickets: tickets,
+        })
+    }
+    catch (e: any) {
+        res.status(500).json({
+            name: 'Error finding tickets',
+            message: e.message,
+        })
+    }
+}
