@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "ts-node ./script.ts",
-    "test": "jest"
+    "test": "jest",
+    "db:push": "prisma db push --preview-feature"
   },
   "dependencies": {
     "@prisma/client": "3.12.0",
