@@ -10,13 +10,15 @@ describe('Test support APIs', () => {
 
     it('Should return the created support member after creation', async () => {
         const response = await request(app).post('/supportMembers').send({
-            name: 'Test',
-            email: 'test@test.com'
+            firstName: 'Test',
+            lastName: 'SupportMember',
+            email: 'supportmember@test.com'
         });
         expect(response.status).toBe(200);
         expect(response.body.supportMember).toBeDefined();
-        expect(response.body.supportMember.name).toBe('Test');
-        expect(response.body.supportMember.email).toBe('test@test.com')
+        expect(response.body.supportMember.firstName).toBe('Test');
+        expect(response.body.supportMember.lastName).toBe('SupportMember');
+        expect(response.body.supportMember.email).toBe('supportmember@test.com');
     })
 
     it('Should return the updated support member after update', async () => {
@@ -26,13 +28,15 @@ describe('Test support APIs', () => {
         const lastID = getAllSupportMembersRes.body.supportMembers?.[memberAmount - 1].id;
 
         const response = await request(app).put(`/supportMembers/${lastID}`).send({
-            name: 'Test',
-            email: 'new@test.com'
+            firstName: 'TestUpdated',
+            lastName: 'SupportMemberUpdated',
         });
         expect(response.status).toBe(200);
         expect(response.body.supportMember).toBeDefined();
-        expect(response.body.supportMember.name).toBe('Test');
-        expect(response.body.supportMember.email).toBe('new@test.com')
+        expect(response.body.supportMember.firstName).toBe('TestUpdated');
+        expect(response.body.supportMember.lastName).toBe('SupportMemberUpdated');
+        expect(response.body.supportMember.email).toBe('supportmember@test.com');
+
     })
 
     it('Should return the deleted support member after deletion', async () => {
@@ -44,8 +48,9 @@ describe('Test support APIs', () => {
         const response = await request(app).delete(`/supportMembers/${lastID}`);
         expect(response.status).toBe(200);
         expect(response.body.supportMember).toBeDefined();
-        expect(response.body.supportMember.name).toBe('Test');
-        expect(response.body.supportMember.email).toBe('new@test.com')
+        expect(response.body.supportMember.firstName).toBe('TestUpdated');
+        expect(response.body.supportMember.lastName).toBe('SupportMemberUpdated');
+        expect(response.body.supportMember.email).toBe('supportmember@test.com');
     })
 
     afterAll(done => {

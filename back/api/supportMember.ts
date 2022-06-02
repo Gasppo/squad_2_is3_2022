@@ -54,7 +54,8 @@ export async function createSupportMember(req: Request, res: Response<getSingleS
     try {
         const supportMember = await prisma.supportMember.create({
             data: {
-                name: req.body.name,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
             }
         })
@@ -98,8 +99,9 @@ export async function updateSupportMember(req: Request, res: Response<getSingleS
                 id: Number(id),
             },
             data: {
-                name: req.body.name,
-                email: req.body.email,
+                firstName: req.body.firstName || undefined ,
+                lastName: req.body.lastName || undefined,
+                email: req.body.email || undefined,
             }
         })
         res.json({

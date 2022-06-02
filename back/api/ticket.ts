@@ -81,22 +81,23 @@ export async function createTicket(req: Request, res: Response<getSingleTicketDa
 
 export async function updateTicket(req: Request, res: Response<getSingleTicketData>) {
     const reqBody: Ticket = req.body
+    const { id } = req.params
     try {
         const ticket = await prisma.ticket.update({
             where: {
-                id: Number(reqBody.id),
+                id: Number(id),
             },
             data: {
-                createdAt: new Date(),
+                createdAt: undefined,
                 updatedAt: new Date(),
-                title: reqBody.title,
-                description: reqBody.description,
-                status: reqBody.status,
-                priority: reqBody.priority,
-                asigneeId: reqBody.asigneeId,
-                authorId: reqBody.authorId,
-                productId: reqBody.productId,
-                internal: reqBody.internal,
+                title: reqBody.title || undefined,
+                description: reqBody.description || undefined,
+                status: reqBody.status || undefined,
+                priority: reqBody.priority || undefined,
+                asigneeId: reqBody.asigneeId || undefined,
+                authorId: reqBody.authorId || undefined,
+                productId: reqBody.productId || undefined,
+                internal: reqBody.internal || undefined,
             }
         })
         res.json({

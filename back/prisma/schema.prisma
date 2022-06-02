@@ -12,25 +12,19 @@ datasource db {
 }
 
 model TicketAuthor {
-  id      Int      @id
-  name    String
+  id      Int      @id @default(autoincrement())
+  firstName    String
+  lastName    String
   email   String
-  phone   String
   tickets Ticket[]
 }
 
 model SupportMember {
   id      Int      @id @default(autoincrement())
-  name    String
+  firstName    String
+  lastName    String
   email   String
   tickets Ticket[]
-}
-
-model Resource {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String
-  tasks Task[]
 }
 
 model Ticket {
@@ -42,13 +36,13 @@ model Ticket {
   author      TicketAuthor   @relation(fields: [authorId], references: [id])
   authorId    Int
   assignee    SupportMember? @relation(fields: [asigneeId], references: [id])
-  asigneeId   Int
+  asigneeId   Int?
   internal    Boolean
   createdAt   DateTime
   updatedAt   DateTime
   tasks       Task[]
   product     Product?       @relation(fields: [productId], references: [id])
-  productId   Int
+  productId   Int?
 }
 
 model Product {
@@ -70,6 +64,5 @@ model Task {
   updatedAt          DateTime
   ticket             Ticket    @relation(fields: [ticketId], references: [id])
   ticketId           Int
-  resourceAssigned   Resource? @relation(fields: [resourceAssignedId], references: [id])
   resourceAssignedId Int
 }
