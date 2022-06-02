@@ -1,12 +1,21 @@
 import { PrismaClient } from '@prisma/client'
 import express from 'express'
 import { createSupportMember, deleteSupportMember, getAllSupportMembers, getSupportMemberById, updateSupportMember } from './api/supportMember'
-import { createTicket, deleteTicket, getAllTickets, getTicketById, updateTicket } from './api/ticket'
+import { createTicket, deleteTicket, getAllTickets, getAllTicketsWithAuthor, getTicketById, updateTicket } from './api/ticket'
 import { createTicketAuthor, deleteTicketAuthor, getAllTicketAuthors, getTicketAuthorById, updateTicketAuthor } from './api/ticketAuthors'
 
 
 const prisma = new PrismaClient()
 const app = express()
+
+//Add CORS headers
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    next()
+})
+
+
 app.use(express.json())
 export const server = app.listen(4000, () => {
   console.log('Server started on http://localhost:4000')
@@ -26,6 +35,7 @@ app.put('/supportMembers/:id', updateSupportMember)
 
 //Tickets
 app.get('/tickets', getAllTickets)
+app.get('/tickets/full', getAllTicketsWithAuthor)
 app.get('/tickets/:id', getTicketById)
 app.post('/tickets', createTicket)
 app.delete('/tickets/:id', deleteTicket)
