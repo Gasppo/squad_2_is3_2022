@@ -46,8 +46,9 @@ jobs:
     - 
         run: npm install
         working-directory: back
-    - name: Prisma generate and push
+    - name: Prisma Generate
       run: npx prisma generate
+    - name: Prisma Migrate 
       run: npm run db:push
       
     - 
