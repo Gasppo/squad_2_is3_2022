@@ -1,7 +1,28 @@
+import { TicketAuthor } from '@prisma/client';
 import request from 'supertest';
 import app, { server } from '../script';
 
+const createTestTicketAuthor = async () => {
+    const response = await request(app).post('/ticketAuthors').send({
+        firstName: 'TicketTest',
+        lastName: 'Author',
+        email: 'tickettestauthor@test.com'
+    });
+    return response.body.ticketAuthor.id;
+}
+
+const deleteTestTicketAuthor = async (id: number) => {
+    const response = await request(app).delete(`/ticketAuthors/${id}`);
+    return response.body.ticketAuthor.id;
+}
+
 describe('Test Ticket APIs', () => {
+    let authorId: number;
+    //Create Ticket Author and save ID
+    beforeAll(async () => {
+        authorId = await createTestTicketAuthor();
+    })
+
     it('Should return all tickets', async () => {
         const response = await request(app).get('/tickets');
         expect(response.status).toBe(200);
@@ -14,7 +35,7 @@ describe('Test Ticket APIs', () => {
             "description": "Test Ticket description",
             "status": "OPEN",
             "priority": 2,
-            "authorId": 1,
+            "authorId": authorId,
             "internal": true
         });
         expect(response.status).toBe(200);
@@ -23,7 +44,7 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket.description).toBe('Test Ticket description');
         expect(response.body.ticket.status).toBe('OPEN');
         expect(response.body.ticket.priority).toBe(2);
-        expect(response.body.ticket.authorId).toBe(1);
+        expect(response.body.ticket.authorId).toBe(authorId);
         expect(response.body.ticket.internal).toBe(true);
 
     })
@@ -44,7 +65,7 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket.description).toBe('Test Ticket description Changed');
         expect(response.body.ticket.status).toBe('OPEN');
         expect(response.body.ticket.priority).toBe(2);
-        expect(response.body.ticket.authorId).toBe(1);
+        expect(response.body.ticket.authorId).toBe(authorId);
         expect(response.body.ticket.internal).toBe(true);
 
     })
@@ -62,14 +83,16 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket.description).toBe('Test Ticket description Changed');
         expect(response.body.ticket.status).toBe('OPEN');
         expect(response.body.ticket.priority).toBe(2);
-        expect(response.body.ticket.authorId).toBe(1);
+        expect(response.body.ticket.authorId).toBe(authorId);
         expect(response.body.ticket.internal).toBe(true);
 
     })
 
     
     afterAll(done => {
+        deleteTestTicketAuthor(authorId).then(() => {
         server.close();
         done();
+        });
     });
 })
