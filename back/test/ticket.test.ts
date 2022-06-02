@@ -18,7 +18,7 @@ const deleteTestTicketAuthor = async (id: number) => {
 
 describe('Test Ticket APIs', () => {
     let authorId: number;
-    //Create Ticket Author and save ID
+    
     beforeAll(async () => {
         authorId = await createTestTicketAuthor();
     })
