@@ -30,6 +30,9 @@ jobs:
     - 
         run: npm install
         working-directory: back
+    - name: Prisma generate
+      run: npx prisma generate
+      
     - 
         run: npm ci
         working-directory: back
