@@ -1,0 +1,22 @@
+{
+  "name": "squad_2_is3_2022",
+  "version": "1.0.0",
+  "description": "Team 2 - PSA",
+  "main": "index.js",
+  "scripts": {
+    "watch": "yarn --cwd back cnodemon ./script.ts",
+    "dev": "yarn --cwd back ts-node ./script.ts",
+    "test": "yarn --cwd back jest",
+    "db:push": "yarn --cwd back prisma db push --preview-feature"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gasppo/squad_2_is3_2022.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gasppo/squad_2_is3_2022/issues"
+  },
+  "homepage": "https://github.com/Gasppo/squad_2_is3_2022#readme"
+}
