@@ -12,6 +12,7 @@
     "typescript": "4.6.3"
   },
   "scripts": {
+    "watch": "nodemon ./script.ts",
     "dev": "ts-node ./script.ts",
     "test": "jest",
     "db:push": "prisma db push --preview-feature"
