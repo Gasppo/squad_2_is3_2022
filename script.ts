@@ -1,11 +1,8 @@
-import { PrismaClient } from '@prisma/client'
-import express from 'express'
 import { createSupportMember, deleteSupportMember, getAllSupportMembers, getSupportMemberById, updateSupportMember } from './api/supportMember'
 import { createTicket, deleteTicket, getAllTickets, getAllTicketsWithAuthor, getTicketById, updateTicket } from './api/ticket'
 import { createTicketAuthor, deleteTicketAuthor, getAllTicketAuthors, getTicketAuthorById, updateTicketAuthor } from './api/ticketAuthors'
+const express = require('express')
 
-
-const prisma = new PrismaClient()
 const app = express()
 
 //Add CORS headers
