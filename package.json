@@ -4,7 +4,7 @@
   "description": "Team 2 - PSA",
   "main": "index.js",
   "scripts": {
-    "watch": "yarn --cwd back cnodemon ./script.ts",
+    "watch": "yarn --cwd back nodemon ./script.ts",
     "dev": "yarn --cwd back ts-node ./script.ts",
     "test": "yarn --cwd back jest",
     "db:push": "yarn --cwd back prisma db push --preview-feature"
