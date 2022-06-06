@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
 const app = express()
 
 //Add CORS headers
-app.use((req, res, next) => {
+app.use((req: any, res: any, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
@@ -22,7 +22,7 @@ export const server = app.listen(4000, () => {
   console.log('Server started on http://localhost:4000')
 })
 
-app.get('/', async (req, res) => {
+app.get('/', async (req: any, res: any) => {
   res.send('Hello Worlds!')
 })
 
