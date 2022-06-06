@@ -1,12 +1,3 @@
 node_modules
-dist
-yarn-error.log
-.yalc
-yalc.lock
-coverage
-*.tsbuildinfo
-.eslintcache
-.npmrc
-cobertura-coverage.xml
-junit.xml
-*.rest
+# Keep environment variables out of version control
+.env

@@ -1,0 +1,31 @@
+###
+GET http://localhost:4000/tickets/full HTTP/1.1
+
+###
+
+POST http://localhost:4000/tickets HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Test Ticket",
+    "description": "Test Ticket description",
+    "status": "OPEN",
+    "priority": 2,
+    "authorId": 1,
+    "internal": true
+}
+
+###
+DELETE http://localhost:4000/tickets/16 HTTP/1.1
+
+
+###
+
+POST http://localhost:4000/ticketAuthors HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Gaspar",
+    "lastName": "Garcia Barnetche",
+    "email": "garciagb24@gmail.com"
+}
