@@ -19,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/Gasppo/squad_2_is3_2022/issues"
   },
-  "homepage": "https://github.com/Gasppo/squad_2_is3_2022#readme",
-  "dependencies": {
-    "nodemon": "^2.0.16"
-  }
+  "homepage": "https://github.com/Gasppo/squad_2_is3_2022#readme"
 }
