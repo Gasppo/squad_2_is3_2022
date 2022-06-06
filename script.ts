@@ -15,7 +15,7 @@ app.use((req: any, res: any, next: any ) => {
 
 
 app.use(express.json())
-export const server = app.listen(4000, () => {
+export const server = app.listen(4123, () => {
   console.log('Server started on http://localhost:4000')
 })
 
