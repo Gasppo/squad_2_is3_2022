@@ -4,9 +4,8 @@ import app, { server } from '../script';
 
 const createTestTicketAuthor = async () => {
     const response = await request(app).post('/ticketAuthors').send({
-        firstName: 'TicketTest',
-        lastName: 'Author',
-        email: 'tickettestauthor@test.com'
+        razonSocial: "UNIVERSIDAD CATOLICA ARGENTINA",
+        CUIT: "30-53621658-4",
     });
     return response.body.ticketAuthor.id;
 }
@@ -18,7 +17,7 @@ const deleteTestTicketAuthor = async (id: number) => {
 
 describe('Test Ticket APIs', () => {
     let authorId: number;
-    
+
     beforeAll(async () => {
         authorId = await createTestTicketAuthor();
     })
@@ -48,7 +47,7 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket.internal).toBe(true);
 
     })
-    
+
     it('Should return the updated ticket after update', async () => {
         const getAllTicketsRes = await request(app).get('/tickets');
         expect(getAllTicketsRes.body.tickets).toBeDefined();
@@ -87,11 +86,11 @@ describe('Test Ticket APIs', () => {
 
     })
 
-    
+
     afterAll(done => {
         deleteTestTicketAuthor(authorId).then(() => {
-        server.close();
-        done();
+            server.close();
+            done();
         });
     });
 })
