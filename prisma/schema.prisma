@@ -7,24 +7,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
+  provider          = "postgres"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOWDATABASE_URL")
 }
 
 model TicketAuthor {
-  id      Int      @id @default(autoincrement())
-  firstName    String
-  lastName    String
-  email   String
-  tickets Ticket[]
+  id          Int      @id @default(autoincrement())
+  razonSocial String
+  CUIT        String
+  tickets     Ticket[]
 }
 
 model SupportMember {
-  id      Int      @id @default(autoincrement())
-  firstName    String
-  lastName    String
-  email   String
-  tickets Ticket[]
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  tickets   Ticket[]
 }
 
 model Ticket {
@@ -40,29 +40,5 @@ model Ticket {
   internal    Boolean
   createdAt   DateTime
   updatedAt   DateTime
-  tasks       Task[]
-  product     Product?       @relation(fields: [productId], references: [id])
   productId   Int?
-}
-
-model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  vendor      String
-  version     String
-  tickets     Ticket[]
-}
-
-model Task {
-  id                 Int       @id @default(autoincrement())
-  title              String
-  description        String
-  status             String
-  priority           Int
-  createdAt          DateTime
-  updatedAt          DateTime
-  ticket             Ticket    @relation(fields: [ticketId], references: [id])
-  ticketId           Int
-  resourceAssignedId Int
 }
