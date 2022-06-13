@@ -1,4 +1,3 @@
-import { createSupportMember, deleteSupportMember, getAllSupportMembers, getSupportMemberById, updateSupportMember } from './api/supportMember'
 import { createTicket, deleteTicket, getAllTickets, getAllTicketsWithAuthor, getTicketById, updateTicket } from './api/ticket'
 import { createTicketAuthor, deleteTicketAuthor, getAllTicketAuthors, getAuthorByCUIT, getTicketAuthorById, updateTicketAuthor } from './api/ticketAuthors'
 const express = require('express')
@@ -24,12 +23,12 @@ app.get('/', async (req: any, res: any) => {
 })
 
 
-//SupportMembers
-app.get('/supportMembers', getAllSupportMembers)
-app.get('/supportMembers/:id', getSupportMemberById)
-app.post('/supportMembers', createSupportMember) 
-app.delete('/supportMembers/:id', deleteSupportMember)
-app.put('/supportMembers/:id', updateSupportMember)
+//SupportMembers - Out of scope
+// app.get('/supportMembers', getAllSupportMembers)
+// app.get('/supportMembers/:id', getSupportMemberById)
+// app.post('/supportMembers', createSupportMember) 
+// app.delete('/supportMembers/:id', deleteSupportMember)
+// app.put('/supportMembers/:id', updateSupportMember)
 
 //Tickets
 app.get('/tickets', getAllTickets)

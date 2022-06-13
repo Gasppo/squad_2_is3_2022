@@ -2,13 +2,13 @@ import request from 'supertest';
 import app, { server } from '../script';
 
 describe('Test support APIs', () => {
-    it('Should return all support members', async () => {
+    xit('Should return all support members', async () => {
         const response = await request(app).get('/supportMembers');
         expect(response.status).toBe(200);
         expect(response.body.supportMembers).toBeDefined();
     })
 
-    it('Should return the created support member after creation', async () => {
+    xit('Should return the created support member after creation', async () => {
         const response = await request(app).post('/supportMembers').send({
             firstName: 'Test',
             lastName: 'SupportMember',
@@ -21,7 +21,7 @@ describe('Test support APIs', () => {
         expect(response.body.supportMember.email).toBe('supportmember@test.com');
     })
 
-    it('Should return the updated support member after update', async () => {
+    xit('Should return the updated support member after update', async () => {
         const getAllSupportMembersRes = await request(app).get('/supportMembers');
         expect(getAllSupportMembersRes.body.supportMembers).toBeDefined();
         const memberAmount = getAllSupportMembersRes.body.supportMembers?.length
@@ -39,7 +39,7 @@ describe('Test support APIs', () => {
 
     })
 
-    it('Should return the deleted support member after deletion', async () => {
+    xit('Should return the deleted support member after deletion', async () => {
         const getAllSupportMembersRes = await request(app).get('/supportMembers');
         expect(getAllSupportMembersRes.body.supportMembers).toBeDefined();
         const memberAmount = getAllSupportMembersRes.body.supportMembers?.length
