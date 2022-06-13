@@ -10,15 +10,13 @@ describe('Test Ticket Author APIs', () => {
 
     it('Should return the created ticket author after creation', async () => {
         const response = await request(app).post('/ticketAuthors').send({
-            firstName: 'Test',
-            lastName: 'TicketAuthor',
-            email: 'ticketauthor@test.com'
+            razonSocial: "UNIVERSIDAD CATOLICA ARGENTINA",
+            CUIT: "30-53621658-4",
         });
         expect(response.status).toBe(200);
         expect(response.body.ticketAuthor).toBeDefined();
-        expect(response.body.ticketAuthor.firstName).toBe('Test');
-        expect(response.body.ticketAuthor.lastName).toBe('TicketAuthor');
-        expect(response.body.ticketAuthor.email).toBe('ticketauthor@test.com');
+        expect(response.body.ticketAuthor.razonSocial).toBe("UNIVERSIDAD CATOLICA ARGENTINA");
+        expect(response.body.ticketAuthor.CUIT).toBe('30-53621658-4');
 
     })
 
@@ -30,37 +28,32 @@ describe('Test Ticket Author APIs', () => {
         const lastID = getAllTicketAuthorsRes.body.ticketAuthors?.[memberAmount - 1].id;
 
         const response = await request(app).put(`/ticketAuthors/${lastID}`).send({
-            firstName: 'TestChanged',
-            lastName: 'TicketAuthorChanged'
+            razonSocial: "UCA",
         });
         expect(response.status).toBe(200);
 
         expect(response.body.ticketAuthor).toBeDefined();
-        expect(response.body.ticketAuthor.firstName).toBe('TestChanged');
-        expect(response.body.ticketAuthor.lastName).toBe('TicketAuthorChanged');
-        expect(response.body.ticketAuthor.email).toBe('ticketauthor@test.com');
+        expect(response.body.ticketAuthor.razonSocial).toBe("UCA");
+        expect(response.body.ticketAuthor.CUIT).toBe('30-53621658-4');
 
     })
 
     it('Should return the deleted ticket author after deletion', async () => {
-            
-            const getAllTicketAuthorsRes = await request(app).get('/ticketAuthors');
-            expect(getAllTicketAuthorsRes.body.ticketAuthors).toBeDefined();
-            const memberAmount = getAllTicketAuthorsRes.body.ticketAuthors?.length
-            const lastID = getAllTicketAuthorsRes.body.ticketAuthors?.[memberAmount - 1].id;
-    
-            const response = await request(app).delete(`/ticketAuthors/${lastID}`);
-            expect(response.status).toBe(200);
-            expect(response.body.ticketAuthor).toBeDefined();
-            expect(response.body.ticketAuthor.firstName).toBe('TestChanged');
-            expect(response.body.ticketAuthor.lastName).toBe('TicketAuthorChanged');
-            expect(response.body.ticketAuthor.email).toBe('ticketauthor@test.com');
+        const getAllTicketAuthorsRes = await request(app).get('/ticketAuthors');
+        expect(getAllTicketAuthorsRes.body.ticketAuthors).toBeDefined();
+        const memberAmount = getAllTicketAuthorsRes.body.ticketAuthors?.length
+        const lastID = getAllTicketAuthorsRes.body.ticketAuthors?.[memberAmount - 1].id;
 
+        const response = await request(app).delete(`/ticketAuthors/${lastID}`);
+        expect(response.status).toBe(200);
+        expect(response.body.ticketAuthor).toBeDefined();
+        expect(response.body.ticketAuthor.razonSocial).toBe("UCA");
+        expect(response.body.ticketAuthor.CUIT).toBe('30-53621658-4');
     })
-    
+
     afterAll(done => {
         server.close();
         done();
     });
-    
+
 })
