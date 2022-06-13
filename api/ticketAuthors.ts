@@ -114,3 +114,23 @@ export async function updateTicketAuthor(req: Request, res: Response<getSingleTi
         })
     }
 }
+
+export async function getAuthorByCUIT(req: Request, res: Response<getSingleTicketAuthorData>) {
+    try {
+        const { CUIT } = req.params
+        const ticketAuthor = await prisma.ticketAuthor.findFirst({
+            where: {
+                CUIT: CUIT,
+            },
+        })
+        res.json({
+            ticketAuthor: ticketAuthor,
+        })
+    }
+    catch (e: any) {
+        res.status(500).json({
+            name: 'Error finding ticket author',
+            message: e.message,
+        })
+    }
+}

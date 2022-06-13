@@ -1,6 +1,6 @@
 import { createSupportMember, deleteSupportMember, getAllSupportMembers, getSupportMemberById, updateSupportMember } from './api/supportMember'
 import { createTicket, deleteTicket, getAllTickets, getAllTicketsWithAuthor, getTicketById, updateTicket } from './api/ticket'
-import { createTicketAuthor, deleteTicketAuthor, getAllTicketAuthors, getTicketAuthorById, updateTicketAuthor } from './api/ticketAuthors'
+import { createTicketAuthor, deleteTicketAuthor, getAllTicketAuthors, getAuthorByCUIT, getTicketAuthorById, updateTicketAuthor } from './api/ticketAuthors'
 const express = require('express')
 
 const app = express()
@@ -42,6 +42,7 @@ app.put('/tickets/:id', updateTicket)
 //TicketAuthors
 app.get('/ticketAuthors', getAllTicketAuthors)
 app.get('/ticketAuthors/:id', getTicketAuthorById)
+app.get('/ticketAuthors/CUIT/:CUIT', getAuthorByCUIT)
 app.post('/ticketAuthors', createTicketAuthor)
 app.delete('/ticketAuthors/:id', deleteTicketAuthor)
 app.put('/ticketAuthors/:id', updateTicketAuthor)

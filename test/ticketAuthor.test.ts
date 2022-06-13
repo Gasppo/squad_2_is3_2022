@@ -37,6 +37,16 @@ describe('Test Ticket Author APIs', () => {
         expect(response.body.ticketAuthor.CUIT).toBe('30-53621658-4');
 
     })
+    
+    it('Should return the correct ticket author by CUIT', async () => {
+
+        const response = await request(app).get(`/ticketAuthors/CUIT/30-53621658-4`);
+        expect(response.status).toBe(200);
+        expect(response.body.ticketAuthor).toBeDefined();
+        expect(response.body.ticketAuthor.razonSocial).toBe("UCA");
+        expect(response.body.ticketAuthor.CUIT).toBe('30-53621658-4');
+
+    })
 
     it('Should return the deleted ticket author after deletion', async () => {
         const getAllTicketAuthorsRes = await request(app).get('/ticketAuthors');
