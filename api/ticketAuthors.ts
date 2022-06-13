@@ -55,9 +55,8 @@ export async function createTicketAuthor(req: Request, res: Response<getSingleTi
     try {
         const ticketAuthor = await prisma.ticketAuthor.create({
             data: {
-                firstName: reqBody.firstName,
-                lastName: reqBody.lastName,
-                email: reqBody.email,
+                razonSocial: reqBody.razonSocial,
+                CUIT: reqBody.CUIT,
             },
         })
         res.json({
@@ -100,9 +99,8 @@ export async function updateTicketAuthor(req: Request, res: Response<getSingleTi
                 id: Number(id),
             },
             data: {
-                firstName: req.body.firstName || undefined,
-                lastName: req.body.lastName  || undefined,
-                email: req.body.email || undefined,
+                razonSocial: req.body.razonSocial,
+                CUIT: req.body.CUIT,
             },
         })
         res.json({
