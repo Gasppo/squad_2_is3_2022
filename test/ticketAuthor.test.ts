@@ -1,7 +1,13 @@
 import request from 'supertest';
-import app, { server } from '../script';
+import app from '../script';
 
 describe('Test Ticket Author APIs', () => {
+    let server: any;
+
+    beforeAll(async () => {
+        server = app.listen(process.env.PORT || 4100)
+    })
+
     it('Should return all ticket authors', async () => {
         const response = await request(app).get('/ticketAuthors');
         expect(response.status).toBe(200);

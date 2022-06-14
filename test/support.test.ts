@@ -1,7 +1,13 @@
 import request from 'supertest';
-import app, { server } from '../script';
+import app from '../script';
 
 describe('Test support APIs', () => {
+    let server: any;
+
+    beforeAll(async () => {
+        server = app.listen(process.env.PORT || 4100)
+    })
+    
     xit('Should return all support members', async () => {
         const response = await request(app).get('/supportMembers');
         expect(response.status).toBe(200);

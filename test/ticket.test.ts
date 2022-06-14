@@ -1,6 +1,6 @@
 import { TicketAuthor } from '@prisma/client';
 import request from 'supertest';
-import app, { server } from '../script';
+import app from '../script';
 
 const createTestTicketAuthor = async () => {
     const response = await request(app).post('/ticketAuthors').send({
@@ -17,8 +17,10 @@ const deleteTestTicketAuthor = async (id: number) => {
 
 describe('Test Ticket APIs', () => {
     let authorId: number;
-
+    let server: any;
+    
     beforeAll(async () => {
+        server = app.listen(process.env.PORT || 4100)
         authorId = await createTestTicketAuthor();
     })
 
@@ -89,7 +91,7 @@ describe('Test Ticket APIs', () => {
 
     afterAll(done => {
         deleteTestTicketAuthor(authorId).then(() => {
-            server.close();
+            server.close()
             done();
         });
     });

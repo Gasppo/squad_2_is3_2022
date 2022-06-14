@@ -3,8 +3,8 @@
   "license": "MIT",
 
   "scripts": {
-    "start": "nodemon ./script.ts",
-    "watch": "nodemon ./script.ts",
+    "start": "nodemon ./server.ts",
+    "watch": "nodemon ./server.ts",
     "dev": "ts-node ./script.ts",
     "test": "jest",
     "db:push": "prisma db push --preview-feature"
