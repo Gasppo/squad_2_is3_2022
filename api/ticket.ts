@@ -64,6 +64,7 @@ export async function createTicket(req: Request, res: Response<getSingleTicketDa
                 asigneeId: reqBody.asigneeId,
                 authorId: reqBody.authorId,
                 productId: reqBody.productId,
+                productLicenseId: reqBody.productLicenseId,
                 internal: reqBody.internal,
             }
         })
@@ -98,6 +99,7 @@ export async function updateTicket(req: Request, res: Response<getSingleTicketDa
                 authorId: reqBody.authorId || undefined,
                 productId: reqBody.productId || undefined,
                 internal: reqBody.internal || undefined,
+                productLicenseId: reqBody.productLicenseId || undefined    
             }
         })
         res.json({
