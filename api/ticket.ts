@@ -73,6 +73,7 @@ export async function createTicket(req: Request, res: Response<getSingleTicketDa
         })
     }
     catch (e: any) {
+        console.log(e.message)
         res.status(500).json({
             name: 'Error creating ticket',
             message: e.message,
@@ -129,25 +130,6 @@ export async function deleteTicket(req: Request, res: Response<getSingleTicketDa
     catch (e: any) {
         res.status(500).json({
             name: 'Error deleting ticket',
-            message: e.message,
-        })
-    }
-}
-
-export async function getAllTicketsWithAuthor(req: Request, res: Response<getManyTicketsData>) {
-    try {
-        const tickets = await prisma.ticket.findMany({
-            include: {
-                author: true,
-            }
-        })
-        res.json({
-            tickets: tickets,
-        })
-    }
-    catch (e: any) {
-        res.status(500).json({
-            name: 'Error finding tickets',
             message: e.message,
         })
     }

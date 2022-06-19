@@ -8,13 +8,13 @@ describe('Test Ticket Author APIs', () => {
         server = app.listen(process.env.PORT || 4100)
     })
 
-    it('Should return all ticket authors', async () => {
+    xit('Should return all ticket authors', async () => {
         const response = await request(app).get('/ticketAuthors');
         expect(response.status).toBe(200);
         expect(response.body.ticketAuthors).toBeDefined();
     })
 
-    it('Should return the created ticket author after creation', async () => {
+    xit('Should return the created ticket author after creation', async () => {
         const response = await request(app).post('/ticketAuthors').send({
             razonSocial: "UNIVERSIDAD CATOLICA ARGENTINA",
             CUIT: "30-53621658-4",
@@ -28,7 +28,7 @@ describe('Test Ticket Author APIs', () => {
 
 
 
-    it('Should return the correct ticket author by CUIT', async () => {
+    xit('Should return the correct ticket author by CUIT', async () => {
 
         const response = await request(app).get(`/ticketAuthors/CUIT/30-53621658-4`);
         expect(response.status).toBe(200);
@@ -38,7 +38,7 @@ describe('Test Ticket Author APIs', () => {
 
     })
 
-    it('Should return the updated ticket author after update', async () => {
+    xit('Should return the updated ticket author after update', async () => {
 
         const getAllTicketAuthorsRes = await request(app).get('/ticketAuthors');
         expect(getAllTicketAuthorsRes.body.ticketAuthors).toBeDefined();
@@ -57,7 +57,7 @@ describe('Test Ticket Author APIs', () => {
     })
 
 
-    it('Should return the deleted ticket author after deletion', async () => {
+    xit('Should return the deleted ticket author after deletion', async () => {
         const getAllTicketAuthorsRes = await request(app).get('/ticketAuthors');
         expect(getAllTicketAuthorsRes.body.ticketAuthors).toBeDefined();
         const memberAmount = getAllTicketAuthorsRes.body.ticketAuthors?.length

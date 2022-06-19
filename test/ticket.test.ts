@@ -1,27 +1,14 @@
-import { TicketAuthor } from '@prisma/client';
 import request from 'supertest';
 import app from '../script';
 
-const createTestTicketAuthor = async () => {
-    const response = await request(app).post('/ticketAuthors').send({
-        razonSocial: "UNIVERSIDAD CATOLICA ARGENTINA",
-        CUIT: "30-53621658-4",
-    });
-    return response.body.ticketAuthor.id;
-}
-
-const deleteTestTicketAuthor = async (id: number) => {
-    const response = await request(app).delete(`/ticketAuthors/${id}`);
-    return response.body.ticketAuthor.id;
-}
 
 describe('Test Ticket APIs', () => {
     let authorId: number;
     let server: any;
-    
+
     beforeAll(async () => {
         server = app.listen(process.env.PORT || 4100)
-        authorId = await createTestTicketAuthor();
+        authorId = 1
     })
 
     it('Should return all tickets', async () => {
@@ -90,9 +77,7 @@ describe('Test Ticket APIs', () => {
 
 
     afterAll(done => {
-        deleteTestTicketAuthor(authorId).then(() => {
-            server.close()
-            done();
-        });
+        server.close()
+        done();
     });
 })
