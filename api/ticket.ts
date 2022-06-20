@@ -13,6 +13,53 @@ type getSingleTicketData = {
     ticket?: Ticket | null;
 }
 
+type CreationTicketsData = {
+    createdAt: Date;
+    updatedAt: Date;
+    title: string;
+    description: string;
+    status: string;
+    priority: number;
+    asigneeId: number | null;
+    authorId: number;
+    productId: number | null;
+    productLicenseId: number | null;
+    internal: boolean;
+}
+
+const statuses = [
+    "OPEN",
+    "CLOSED",
+    "IN REVIEW",
+    "REJECTED",
+]
+
+const checkStatus = (status: string) => {
+    if (!statuses.includes(status)) {
+        throw new Error(`Invalid status: ${status}`);
+    }
+}
+
+const checkTicketRequiredFields = (ticket: CreationTicketsData) => {
+    if (!ticket.title) {
+        throw new Error("Title is required");
+    }
+    if (!ticket.description) {
+        throw new Error("Description is required");
+    }
+    if (!ticket.status) {
+        throw new Error("Status is required");
+    }
+    if (!ticket.authorId) {
+        throw new Error("Author ID is required");
+    }
+    if (!ticket.priority) {
+        throw new Error("Priority is required");
+    }
+    checkStatus(ticket.status);
+}
+
+
 const prisma = new PrismaClient()
 
 export async function getAllTickets(req: Request, res: Response<getManyTicketsData>) {
@@ -50,23 +97,66 @@ export async function getTicketById(req: Request, res: Response<getSingleTicketD
     }
 }
 
+export async function getAllTicketsByAuthor(req: Request, res: Response<getManyTicketsData>) {
+    try {
+        const { authorId } = req.params
+        const tickets = await prisma.ticket.findMany({
+            where: {
+                authorId: Number(authorId),
+            },
+        })
+        res.json({
+            tickets: tickets,
+        })
+    }
+    catch (e: any) {
+        res.status(500).json({
+            name: 'Error finding tickets',
+            message: e.message,
+        })
+    }
+}
+
+export async function getAllTicketsByProduct(req: Request, res: Response<getManyTicketsData>) {
+    try {
+        const { productId } = req.params
+        const tickets = await prisma.ticket.findMany({
+            where: {
+                productId: Number(productId),
+            },
+        })
+        res.json({
+            tickets: tickets,
+        })
+    }
+    catch (e: any) {
+        res.status(500).json({
+            name: 'Error finding tickets',
+            message: e.message,
+        })
+    }
+}
+
 export async function createTicket(req: Request, res: Response<getSingleTicketData>) {
     const reqBody: Ticket = req.body
     try {
+        const newTicket = {
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            title: reqBody.title,
+            description: reqBody.description,
+            status: reqBody.status,
+            priority: reqBody.priority,
+            asigneeId: reqBody.asigneeId,
+            authorId: reqBody.authorId,
+            productId: reqBody.productId,
+            productLicenseId: reqBody.productLicenseId,
+            internal: reqBody.internal || false,
+        }
+        checkTicketRequiredFields(newTicket)
+
         const ticket = await prisma.ticket.create({
-            data: {
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                title: reqBody.title,
-                description: reqBody.description,
-                status: reqBody.status,
-                priority: reqBody.priority,
-                asigneeId: reqBody.asigneeId,
-                authorId: reqBody.authorId,
-                productId: reqBody.productId,
-                productLicenseId: reqBody.productLicenseId,
-                internal: reqBody.internal,
-            }
+            data: newTicket
         })
         res.json({
             ticket: ticket,
@@ -85,6 +175,7 @@ export async function updateTicket(req: Request, res: Response<getSingleTicketDa
     const reqBody: Ticket = req.body
     const { id } = req.params
     try {
+        if(reqBody.status) checkStatus(reqBody.status)
         const ticket = await prisma.ticket.update({
             where: {
                 id: Number(id),
@@ -100,7 +191,7 @@ export async function updateTicket(req: Request, res: Response<getSingleTicketDa
                 authorId: reqBody.authorId || undefined,
                 productId: reqBody.productId || undefined,
                 internal: reqBody.internal || undefined,
-                productLicenseId: reqBody.productLicenseId || undefined    
+                productLicenseId: reqBody.productLicenseId || undefined
             }
         })
         res.json({

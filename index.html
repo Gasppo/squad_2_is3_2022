@@ -1,0 +1,180 @@
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    .jsonSnippet{
+        font-family: monospace;
+        font-size: 12px;
+        width: 20%;
+    }
+    .jsonTable {
+        font-family: monospace;
+        font-size: 12px;
+        width: 66%;
+    }
+    .superWrapper{
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        margin-left: 10px;
+    }
+    .code-red {
+        color: rgb(158, 0, 0);
+    }
+    .code-green {
+        color: rgb(0, 158, 0);
+    }
+</style>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<h1>Endpoints:</h1><br />
+<h2>Tickets</h2>
+<div style="font-family:courier;">
+    <table style=>
+        <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>/tickets</td>
+            <td>GET</td>
+            <td>Devuelve todos los tickets</td>
+        </tr>
+        <tr>
+            <td>/tickets/:id</td>
+            <td>GET</td>
+            <td>Devuelve el ticket con id=:id</td>
+        </tr>
+        <tr>
+            <td>/tickets/author/:authorId</td>
+            <td>GET</td>
+            <td>Devuelve todos los tickets del autor con id=:authorId</td>
+        </tr>
+        <tr>
+            <td>/tickets/product/:productId</td>
+            <td>GET</td>
+            <td>Devuelve todos los tickets del producto con id=:productId</td>
+        </tr>
+        <tr>
+            <td>/tickets</td>
+            <td>POST</td>
+            <td>Crea un nuevo ticket</td>
+        </tr>
+        <tr>
+            <td>/tickets/:id</td>
+            <td>PUT</td>
+            <td>Actualiza el ticket con id=:id</td>
+        </tr>
+        <tr>
+            <td>/tickets/:id</td>
+            <td>DELETE</td>
+            <td>Elimina el ticket con id=:id</td>
+        </tr>
+    </table>
+</div>
+<h2>POSTs formats</h2>
+<h3>Content type: JSON</h3>
+<div class="superWrapper">
+<div class="jsonSnippet">
+    <code>
+        {<br/>
+            &nbsp;&nbsp;<span class="code-red">title</span>: <span class="code-green">string</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">description</span>: <span class="code-green">string</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">status</span>: <span class="code-green">string</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">priority</span>: <span class="code-green">int</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">productId</span>: <span class="code-green">int</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">productLicenseId</span>: <span class="code-green">int</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">authorId</span>: <span class="code-green">int</span>; <br/>
+            &nbsp;&nbsp;<span class="code-red">internal</span>: <span class="code-green">boolean</span>; <br/>
+        }
+    </code>
+</div>
+<div style="font-family:courier;" class="jsonTable">
+    <table style=>
+        <tr>
+            <th>Key</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Required</th>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>string</td>
+            <td>Titulo del ticket</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>string</td>
+            <td>Descripcion del ticket</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>string</td>
+            <td>Estado del ticket - Valores posibles [OPEN, CLOSED, IN REVIEW, REJECTED]</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>priority</td>
+            <td>int</td>
+            <td>Prioridad del ticket</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>productId</td>
+            <td>int</td>
+            <td>Id del producto</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>productLicenseId</td>
+            <td>int</td>
+            <td>Id de la licencia del producto</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>authorId</td>
+            <td>int</td>
+            <td>Id del autor</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>internal</td>
+            <td>boolean</td>
+            <td>Es interno?</td>
+            <td>false</td>
+        </tr>
+    </table>
+</div>
+</div>

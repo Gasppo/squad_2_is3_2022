@@ -1,6 +1,8 @@
 import { PrismaClient, TicketAuthor } from "@prisma/client";
 import { Request, Response } from "express";
 
+
+//Out of scope
 type getManyTicketAuthorsData = {
     name?: string;
     message?: string;

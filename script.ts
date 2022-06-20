@@ -1,21 +1,20 @@
-import { createTicket, deleteTicket, getAllTickets,  getTicketById, updateTicket } from './api/ticket'
-import { createTicketAuthor, deleteTicketAuthor, getAllTicketAuthors, getAuthorByCUIT, getTicketAuthorById, updateTicketAuthor } from './api/ticketAuthors'
+import { createTicket, deleteTicket, getAllTickets, getAllTicketsByAuthor, getAllTicketsByProduct, getTicketById, updateTicket } from './api/ticket'
 const express = require('express')
 
 const app = express()
 
 //Add CORS headers
-app.use((req: any, res: any, next: any ) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-    next()
+app.use((req: any, res: any, next: any) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  next()
 })
 
 
 app.use(express.json())
 app.get('/', async (req: any, res: any) => {
-  res.send('Hello Worlds!')
+  res.sendFile(__dirname + '/index.html')
 })
 
 
@@ -29,6 +28,8 @@ app.get('/', async (req: any, res: any) => {
 //Tickets
 app.get('/tickets', getAllTickets)
 app.get('/tickets/:id', getTicketById)
+app.get('/tickets/author/:id', getAllTicketsByAuthor)
+app.get('/tickets/product/:id', getAllTicketsByProduct)
 app.post('/tickets', createTicket)
 app.delete('/tickets/:id', deleteTicket)
 app.put('/tickets/:id', updateTicket)
