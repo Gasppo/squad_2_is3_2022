@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API - Modulo de Recursos",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "host": "psa-support-sq2-api.herokuapp.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tickets": {
+      "get": {
+        "description": "Devuelve todos los tickets",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Crea un nuevo ticket",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "example": "string - [OPEN, CLOSED, IN REVIEW, REJECTED]"
+                },
+                "title": {
+                  "example": "string"
+                },
+                "description": {
+                  "example": "string"
+                },
+                "priority": {
+                  "example": "int"
+                },
+                "authorId": {
+                  "example": "int"
+                },
+                "productId": {
+                  "example": "int"
+                },
+                "productLicenseId": {
+                  "example": "int"
+                },
+                "internal": {
+                  "example": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/tickets/{id}": {
+      "get": {
+        "description": "Devuelve el ticket con id=:id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Elimina el ticket con id=:id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Actualiza el ticket con id=:id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "example": "string - [OPEN, CLOSED, IN REVIEW, REJECTED]"
+                },
+                "title": {
+                  "example": "string"
+                },
+                "description": {
+                  "example": "string"
+                },
+                "priority": {
+                  "example": "int"
+                },
+                "authorId": {
+                  "example": "int"
+                },
+                "productId": {
+                  "example": "int"
+                },
+                "productLicenseId": {
+                  "example": "int"
+                },
+                "internal": {
+                  "example": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/tickets/author/{id}": {
+      "get": {
+        "description": "Devuelve todos los tickets del autor con id=:authorId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/tickets/product/{id}": {
+      "get": {
+        "description": "Devuelve todos los tickets del producto con id=:productId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
