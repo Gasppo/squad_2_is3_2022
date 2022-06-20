@@ -1,5 +1,7 @@
 import app from './script'
 
-app.listen( process.env.PORT || 4005, () => {
-    console.log(`Server started on http://localhost:${process.env.PORT || 4000}`)
+const port = process.env.PORT || 4012
+
+app.listen( port, () => {
+    console.log(`Server started on http://localhost:${port}`)
   })

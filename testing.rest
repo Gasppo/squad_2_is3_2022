@@ -20,11 +20,4 @@ DELETE http://localhost:4000/tickets/16 HTTP/1.1
 
 ###
 
-POST https://psa-support-sq2-api.herokuapp.com/ticketAuthors HTTP/1.1
-content-type: application/json
-
-{
-    "firstName": "Gaspar",
-    "lastName": "Garcia Barnetche",
-    "email": "garciagb24@gmail.com"
-}
+GET https://psa-support-sq2-api.herokuapp.com/tickets HTTP/1.1

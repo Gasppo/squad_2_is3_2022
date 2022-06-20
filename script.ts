@@ -5,7 +5,7 @@ const swaggerDocument = require('./swagger-output.json');
 const app = express()
 
 
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/endpoints', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 //Add CORS headers
 app.use((req: any, res: any, next: any) => {
@@ -17,9 +17,9 @@ app.use((req: any, res: any, next: any) => {
 
 
 app.use(express.json())
-// app.get('/', async (req: any, res: any) => {
-//   res.sendFile(__dirname + '/index.html')
-// })
+app.get('/', async (req: any, res: any) => {
+  res.sendFile(__dirname + '/index.html')
+})
 
 
 
