@@ -40,7 +40,7 @@
               "type": "object",
               "properties": {
                 "status": {
-                  "example": "string - [OPEN, CLOSED, IN REVIEW, REJECTED]"
+                  "example": "string - [Abierto, Cerrado, En analisis, Rechazado]"
                 },
                 "title": {
                   "example": "string"
@@ -132,7 +132,7 @@
               "type": "object",
               "properties": {
                 "status": {
-                  "example": "string - [OPEN, CLOSED, IN REVIEW, REJECTED]"
+                  "example": "string - [Abierto, Cerrado, En analisis, Rechazado]"
                 },
                 "title": {
                   "example": "string"

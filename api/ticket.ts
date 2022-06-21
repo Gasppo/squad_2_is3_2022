@@ -27,12 +27,7 @@ type CreationTicketsData = {
     internal: boolean;
 }
 
-const statuses = [
-    "OPEN",
-    "CLOSED",
-    "IN REVIEW",
-    "REJECTED",
-]
+const statuses = ["Abierto", "Cerrado", "En analisis", "Rechazado"]
 
 const checkStatus = (status: string) => {
     if (!statuses.includes(status)) {

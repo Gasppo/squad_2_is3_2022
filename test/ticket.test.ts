@@ -22,7 +22,7 @@ describe('Test Ticket APIs', () => {
         const response = await request(app).post('/tickets').send({
             "title": "Test Ticket",
             "description": "Test Ticket description",
-            "status": "OPEN",
+            "status": "Abierto",
             "priority": 2,
             "authorId": authorId,
             "internal": true
@@ -31,7 +31,7 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket).toBeDefined();
         expect(response.body.ticket.title).toBe('Test Ticket');
         expect(response.body.ticket.description).toBe('Test Ticket description');
-        expect(response.body.ticket.status).toBe('OPEN');
+        expect(response.body.ticket.status).toBe('Abierto');
         expect(response.body.ticket.priority).toBe(2);
         expect(response.body.ticket.authorId).toBe(authorId);
         expect(response.body.ticket.internal).toBe(true);
@@ -51,7 +51,7 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket).toBeDefined();
         expect(response.body.ticket.title).toBe('Test Ticket Changed');
         expect(response.body.ticket.description).toBe('Test Ticket description Changed');
-        expect(response.body.ticket.status).toBe('OPEN');
+        expect(response.body.ticket.status).toBe('Abierto');
         expect(response.body.ticket.priority).toBe(2);
         expect(response.body.ticket.authorId).toBe(authorId);
         expect(response.body.ticket.internal).toBe(true);
@@ -69,7 +69,7 @@ describe('Test Ticket APIs', () => {
         expect(response.body.ticket).toBeDefined();
         expect(response.body.ticket.title).toBe('Test Ticket Changed');
         expect(response.body.ticket.description).toBe('Test Ticket description Changed');
-        expect(response.body.ticket.status).toBe('OPEN');
+        expect(response.body.ticket.status).toBe('Abierto');
         expect(response.body.ticket.priority).toBe(2);
         expect(response.body.ticket.authorId).toBe(authorId);
         expect(response.body.ticket.internal).toBe(true);
